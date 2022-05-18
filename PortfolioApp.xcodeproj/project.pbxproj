@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		61E28C732835362200051D15 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E28C722835362200051D15 /* CloudKit.framework */; };
+		61E28C752835389700051D15 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E28C742835389700051D15 /* HomeView.swift */; };
+		61E28C77283539D200051D15 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E28C76283539D200051D15 /* ProjectsView.swift */; };
 		61FBEF65283421AA00026EB4 /* PortfolioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FBEF64283421AA00026EB4 /* PortfolioAppApp.swift */; };
 		61FBEF67283421AA00026EB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FBEF66283421AA00026EB4 /* ContentView.swift */; };
 		61FBEF69283421AE00026EB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61FBEF68283421AE00026EB4 /* Assets.xcassets */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		61E28C70283535B200051D15 /* PortfolioApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PortfolioApp.entitlements; sourceTree = "<group>"; };
 		61E28C722835362200051D15 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		61E28C742835389700051D15 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		61E28C76283539D200051D15 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
 		61FBEF61283421AA00026EB4 /* PortfolioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FBEF64283421AA00026EB4 /* PortfolioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAppApp.swift; sourceTree = "<group>"; };
 		61FBEF66283421AA00026EB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				61E28C70283535B200051D15 /* PortfolioApp.entitlements */,
 				61FBEF7728342CA400026EB4 /* Info.plist */,
 				61FBEF64283421AA00026EB4 /* PortfolioAppApp.swift */,
+				61E28C742835389700051D15 /* HomeView.swift */,
+				61E28C76283539D200051D15 /* ProjectsView.swift */,
 				61FBEF66283421AA00026EB4 /* ContentView.swift */,
 				61FBEF722834224D00026EB4 /* Main.xcdatamodeld */,
 				61FBEF752834250000026EB4 /* DataController.swift */,
@@ -159,9 +165,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E28C77283539D200051D15 /* ProjectsView.swift in Sources */,
 				61FBEF742834224D00026EB4 /* Main.xcdatamodeld in Sources */,
 				61FBEF762834250000026EB4 /* DataController.swift in Sources */,
 				61FBEF67283421AA00026EB4 /* ContentView.swift in Sources */,
+				61E28C752835389700051D15 /* HomeView.swift in Sources */,
 				61FBEF65283421AA00026EB4 /* PortfolioAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
