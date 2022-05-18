@@ -79,10 +79,10 @@
 			children = (
 				61E28C70283535B200051D15 /* PortfolioApp.entitlements */,
 				61FBEF7728342CA400026EB4 /* Info.plist */,
+				61FBEF66283421AA00026EB4 /* ContentView.swift */,
 				61FBEF64283421AA00026EB4 /* PortfolioAppApp.swift */,
 				61E28C742835389700051D15 /* HomeView.swift */,
 				61E28C76283539D200051D15 /* ProjectsView.swift */,
-				61FBEF66283421AA00026EB4 /* ContentView.swift */,
 				61E28C7828357FA500051D15 /* Item_CoreDataHelpers.swift */,
 				61E28C7A283580C400051D15 /* Project_CoreDataHelpers.swift */,
 				61FBEF722834224D00026EB4 /* Main.xcdatamodeld */,
