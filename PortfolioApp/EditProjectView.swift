@@ -23,8 +23,6 @@ struct EditProjectView: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-
-
     init(project: Project) {
         self.project = project
 

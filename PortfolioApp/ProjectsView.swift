@@ -12,6 +12,9 @@ struct ProjectsView: View {
     static let openTag: String? = "Open"
     static let closeTag: String? = "Close"
 
+    @EnvironmentObject var dataContainer: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     let showClosedProjects: Bool
 
     let projects: FetchRequest<Project>
@@ -33,11 +36,47 @@ struct ProjectsView: View {
                         ForEach(project.projectItems) { item in
                             ItemRowView(item: item)
                         }
+                        .onDelete { offsets in
+                            let allItems = project.projectItems
+
+                            for offset in offsets {
+                                let item = allItems[offset]
+                                dataContainer.delete(item)
+                            }
+                            dataContainer.save()
+                        }
+
+                        if showClosedProjects == false {
+                            Button {
+                                withAnimation {
+                                    let item = Item(context: managedObjectContext)
+                                    item.project = project
+                                    item.creationDate = Date()
+                                    dataContainer.save()
+                                }
+                            } label: {
+                                Label("Add new item", systemImage: "plus")
+                            }
+                        }
                     }
                 }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationBarTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
+            .toolbar {
+                if showClosedProjects == false {
+                    Button {
+                        withAnimation {
+                            let project = Project(context: managedObjectContext)
+                            project.closed = false
+                            project.creationDate = Date()
+                            dataContainer.save()
+                        }
+                    } label: {
+                        Label("Add Project", systemImage: "plus")
+                    }
+                }
+            }
         }
     }
 }
@@ -46,7 +85,7 @@ struct ProjectsView_Previews: PreviewProvider {
     static var dataController = DataController.preview
 
     static var previews: some View {
-        ProjectsView(showClosedProjects: true)
+        ProjectsView(showClosedProjects: false)
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
     }
