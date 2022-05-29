@@ -64,7 +64,7 @@ struct ProjectsView: View {
                                             dataContainer.save()
                                         }
                                     } label: {
-                                        Label("Add new item", systemImage: "plus")
+                                        Label("Add New Item", systemImage: "plus")
                                     }
                                 }
                             }

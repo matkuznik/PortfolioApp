@@ -65,7 +65,7 @@ struct HomeView: View {
                     }
 
                     VStack(alignment: .leading) {
-                        list("Up Next", for: items.wrappedValue.prefix(3))
+                        list("Up next", for: items.wrappedValue.prefix(3))
                         list("More to explore", for: items.wrappedValue.dropFirst(3))
                     }
                     .padding(.horizontal)
@@ -76,7 +76,7 @@ struct HomeView: View {
         }
     }
 
-    @ViewBuilder func list(_ title: String, for items: FetchedResults<Item>.SubSequence) -> some View {
+    @ViewBuilder func list(_ title: LocalizedStringKey, for items: FetchedResults<Item>.SubSequence) -> some View {
         if items.isEmpty {
             EmptyView()
         } else {
