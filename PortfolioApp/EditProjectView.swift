@@ -55,6 +55,13 @@ struct EditProjectView: View {
                             color = item
                             update()
                         }
+                        .accessibilityElement(children: .ignore) //ignore everything what is inside. VoiceOver will not read it at all
+                        .accessibilityAddTraits( //Provide a traits to VoiceOver
+                            item == color
+                            ? [.isButton, .isSelected] //the item is a selected button
+                            : .isButton // the item is a button
+                        )
+                        .accessibilityLabel(LocalizedStringKey(item))
                     }
                 }
                 .padding(.vertical)
