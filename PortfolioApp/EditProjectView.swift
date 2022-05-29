@@ -37,32 +37,10 @@ struct EditProjectView: View {
                 TextField("Project name", text: $title.onChange(update))
                 TextField("Description", text: $detail.onChange(update))
             }
+            
             Section(header: Text("Custom project color")) {
                 LazyVGrid(columns: colorColumns) {
-                    ForEach(Project.colors, id: \.self) { item in
-                        ZStack {
-                            Color(item)
-                                .aspectRatio(1, contentMode: .fit)
-                                .cornerRadius(6)
-
-                            if item == color {
-                                Image(systemName: "checkmark.circle")
-                                    .foregroundColor(.white)
-                                    .font(.largeTitle)
-                            }
-                        }
-                        .onTapGesture {
-                            color = item
-                            update()
-                        }
-                        .accessibilityElement(children: .ignore) //ignore everything what is inside. VoiceOver will not read it at all
-                        .accessibilityAddTraits( //Provide a traits to VoiceOver
-                            item == color
-                            ? [.isButton, .isSelected] //the item is a selected button
-                            : .isButton // the item is a button
-                        )
-                        .accessibilityLabel(LocalizedStringKey(item))
-                    }
+                    ForEach(Project.colors, id: \.self, content: colorButton)
                 }
                 .padding(.vertical)
             }
@@ -95,6 +73,31 @@ struct EditProjectView: View {
     func delete() {
         dataController.delete(project)
         presentationMode.wrappedValue.dismiss()
+    }
+
+    func colorButton(for item: String) -> some View {
+        ZStack {
+            Color(item)
+                .aspectRatio(1, contentMode: .fit)
+                .cornerRadius(6)
+
+            if item == color {
+                Image(systemName: "checkmark.circle")
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+            }
+        }
+        .onTapGesture {
+            color = item
+            update()
+        }
+        .accessibilityElement(children: .ignore) //ignore everything what is inside. VoiceOver will not read it at all
+        .accessibilityAddTraits( //Provide a traits to VoiceOver
+            item == color
+            ? [.isButton, .isSelected] //the item is a selected button
+            : .isButton // the item is a button
+        )
+        .accessibilityLabel(LocalizedStringKey(item))
     }
 }
 
