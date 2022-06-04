@@ -1,5 +1,5 @@
 //
-//  Project_CoreDataHelpers.swift
+//  Project-CoreDataHelpers.swift
 //  PortfolioApp
 //
 //  Created by Mateusz Kuznik on 18/05/2022.
@@ -22,7 +22,8 @@ extension Project {
         "Dark Blue",
         "Midnight",
         "Dark Gray",
-        "Gray"]
+        "Gray"
+    ]
 
     var projectTitle: String {
         title ?? NSLocalizedString("New Project", comment: "Create a new project")
