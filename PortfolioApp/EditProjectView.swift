@@ -30,21 +30,21 @@ struct EditProjectView: View {
         _detail = State(wrappedValue: project.projectDetail)
         _color = State(wrappedValue: project.projectColor)
     }
-    
+
     var body: some View {
         Form {
             Section(header: Text("Basic settings")) {
                 TextField("Project name", text: $title.onChange(update))
                 TextField("Description", text: $detail.onChange(update))
             }
-            
+
             Section(header: Text("Custom project color")) {
                 LazyVGrid(columns: colorColumns) {
                     ForEach(Project.colors, id: \.self, content: colorButton)
                 }
                 .padding(.vertical)
             }
-
+            // swiftlint:disable:next line_length
             Section(footer: Text("Closing a project moves it from the Open to Closed tab; deleting it removes the project entirely.")) {
                 Button(project.closed ? "Reopen this project" : "Close this project") {
                     project.closed.toggle()
@@ -59,7 +59,11 @@ struct EditProjectView: View {
         .navigationTitle("Edit Project")
         .onDisappear(perform: dataController.save)
         .alert(isPresented: $showingDeleteConfirm) {
-            Alert(title: Text("Delete project?"), message: Text("Are you sure you want to delete this project? You will also delete all items it contains."), primaryButton: .default(Text("Delete"), action: delete), secondaryButton: .cancel())
+            Alert(
+                title: Text("Delete project?"),
+                message: Text("Are you sure you want to delete this project? You will also delete all items it contains."), // swiftlint:disable:this line_length
+                primaryButton: .default(Text("Delete"), action: delete),
+                secondaryButton: .cancel())
         }
     }
 
@@ -92,10 +96,10 @@ struct EditProjectView: View {
             color = item
             update()
         }
-        .accessibilityElement(children: .ignore) //ignore everything what is inside. VoiceOver will not read it at all
-        .accessibilityAddTraits( //Provide a traits to VoiceOver
+        .accessibilityElement(children: .ignore) // ignore everything what is inside. VoiceOver will not read it at all
+        .accessibilityAddTraits( // Provide a traits to VoiceOver
             item == color
-            ? [.isButton, .isSelected] //the item is a selected button
+            ? [.isButton, .isSelected] // the item is a selected button
             : .isButton // the item is a button
         )
         .accessibilityLabel(LocalizedStringKey(item))

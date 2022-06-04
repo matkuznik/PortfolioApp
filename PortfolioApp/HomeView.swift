@@ -31,7 +31,7 @@ struct HomeView: View {
 
         request.predicate = NSCompoundPredicate(type: .and, subpredicates: [completedPredicate, openPredicate])
         request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Item.priority, ascending: false),
+            NSSortDescriptor(keyPath: \Item.priority, ascending: false)
         ]
 
         request.fetchLimit = 10
@@ -51,8 +51,8 @@ struct HomeView: View {
                     }
 
                     VStack(alignment: .leading) {
-                        ItemListView(title:"Up next", items: items.wrappedValue.prefix(3))
-                        ItemListView(title:"More to explore", items: items.wrappedValue.dropFirst(3))
+                        ItemListView(title: "Up next", items: items.wrappedValue.prefix(3))
+                        ItemListView(title: "More to explore", items: items.wrappedValue.dropFirst(3))
                     }
                     .padding(.horizontal)
                 }
