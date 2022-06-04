@@ -8,12 +8,24 @@
 import CoreData
 import SwiftUI
 
+/// An environment singleton responsible for managing our Core Data stack, including handling saving,
+/// counting fetch requests, tracking awards, and dealing with sample data.
 class DataController: ObservableObject {
+
+    /// The lone CloudKit container used to store all our data.
     let container: NSPersistentCloudKitContainer
 
+    /// Initializes a data controller, either in memory (for temporary use such as testing and previewing),
+    /// or on permanent storage (for use in regular app runs.)
+    ///
+    /// Defaults to permanent storage.
+    /// - Parameter inMemory: Whether to store this data in temporary memory or not.
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "Main")
 
+        // For testing and previewing purposes, we create a
+        // temporary, in-memory database by writing to /dev/null
+        // so our data is destroyed after the app finishes running.
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -26,6 +38,9 @@ class DataController: ObservableObject {
         }
     }
 
+    /// Create an instance of DataController with in memory storage and fill with simple data.
+    ///
+    /// This property is used in previewing views
     static var preview: DataController = {
         let dataController = DataController(inMemory: true)
 
@@ -37,6 +52,9 @@ class DataController: ObservableObject {
         return dataController
     }()
 
+    /// Creates example projects and items to make manual testing easier.
+    ///
+    /// - Throws: An NSError sent from calling save() on the NSManagedObjectContext.
     func createSampleData() throws {
         let viewContext = container.viewContext
 
@@ -60,6 +78,8 @@ class DataController: ObservableObject {
         try viewContext.save()
     }
 
+    /// Saves our Core Data context if there are changes. This silently ignores
+    /// any errors caused by saving, but this should be fine because all our attributes are optional.
     func save() {
         if container.viewContext.hasChanges {
             try? container.viewContext.save()
@@ -70,6 +90,7 @@ class DataController: ObservableObject {
         container.viewContext.delete(object)
     }
 
+    /// Deletes all Items and Projects. This silently ignores any errors caused by deleting
     func deleteAll() {
         let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
         let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
@@ -80,6 +101,9 @@ class DataController: ObservableObject {
         _ = try? container.viewContext.execute(batchDeleteRequest2)
     }
 
+    /// Count number of items returned by a *fetchRequest*
+    /// - Parameter fetchRequest: the fetch request for each the count is calculated
+    /// - Returns: Number of items returned by a fetch request or **0** if fetch request can not be executed
     func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int {
         (try? container.viewContext.count(for: fetchRequest)) ?? 0
     }
@@ -87,17 +111,20 @@ class DataController: ObservableObject {
     func hasEarned(award: Award) -> Bool {
         switch award.criterion {
         case "items":
+            // returns true if they added a certain number of items
             let fetchRequest: NSFetchRequest<Item> = NSFetchRequest(entityName: "Item")
             let awardCount = count(for: fetchRequest)
             return awardCount >= award.value
 
         case "completed":
+            // returns true if they completed a certain number of items
             let fetchRequest: NSFetchRequest<Item> = NSFetchRequest(entityName: "Item")
             fetchRequest.predicate = NSPredicate(format: "completed = true")
             let awardCount = count(for: fetchRequest)
             return awardCount >= award.value
 
         default:
+            // an unknown award criterion; this should never be allowed
 //            fatalError("Unknown award criterion: \(award.criterion))"
             return false
         }
