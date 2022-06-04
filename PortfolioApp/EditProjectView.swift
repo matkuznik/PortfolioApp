@@ -53,6 +53,7 @@ struct EditProjectView: View {
                 Button("Delete this project") {
                     showingDeleteConfirm.toggle()
                 }
+                .accentColor(.red)
             }
         }
         .navigationTitle("Edit Project")

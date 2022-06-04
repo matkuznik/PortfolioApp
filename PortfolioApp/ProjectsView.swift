@@ -78,7 +78,7 @@ struct ProjectsView: View {
         NavigationView {
             Group {
                 if projects.wrappedValue.isEmpty {
-                    Text("There's is nothing here right now")
+                    Text("There's nothing here right now")
                         .foregroundColor(.secondary)
                 } else {
                     projectList
