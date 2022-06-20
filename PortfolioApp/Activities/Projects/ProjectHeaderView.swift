@@ -26,6 +26,7 @@ struct ProjectHeaderView: View {
                 Image(systemName: "square.and.pencil")
                     .imageScale(.large)
             }
+            .accessibilityIdentifier("NEW PROJECT")
         }
         .padding(.bottom, 10)
         .accessibilityElement(children: .combine)

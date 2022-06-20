@@ -1,5 +1,5 @@
 //
-//  Bnding_onChange.swift
+//  Binding-onChange.swift
 //  PortfolioApp
 //
 //  Created by Mateusz Kuznik on 21/05/2022.
